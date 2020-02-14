@@ -1,0 +1,100 @@
+/*GENERAL STYLES*/
+
+* {
+  -moz-box-sizing: border-box; /* Firexfox */
+  -webkit-box-sizing: border-box; /* Safari/Chrome/iOS/Android */
+  box-sizing: border-box; /* IE */
+}
+
+.clearfix:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+body {
+	font-family: helvetica, 'Lato', sans-serif;
+	padding: 0;
+	margin: 0;
+	font-size: 1rem;
+	background: #fff;
+	counter-reset: section;
+}
+
+/* Calculator Styles */
+
+#calculator {
+    background-color: antiquewhite;
+    max-width: 300px;
+    margin: 20px auto;
+    padding: 0;
+    border-radius: 1%;
+}
+
+#calc-display {
+    height: 80px;
+    margin: 0;
+    padding: 5px 10px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    background-color: #252525;
+    color: #fff;
+    font-size: 2rem;
+}
+
+button {
+    cursor: pointer;
+    border: none;
+    margin: 0;
+    padding: 0.1rem 0.2rem;
+    border-radius: 5%;
+    background-color: #fff;
+    outline-color: pink;
+    font-family: sans-serif;
+    font-size: 1rem;
+    transition: background 100ms ease-in-out;
+
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    
+}
+
+/* I have specified focus styles so that someone navigating without a mouse knows which button is in use */
+button:hover {
+    background-color: #eaeaea;
+    outline-color: #eaeaea;
+}
+
+button:focus {
+    outline-color: black;
+}
+
+button:active {
+    transform: scale(0.95);
+    background-color: #bebbbb;
+}
+
+#calc-buttons {
+    padding: 5px;
+    display: grid;
+    grid-template: repeat(5, 1fr) / repeat(5, 1fr);
+    grid-gap: 5px;
+}
+
+#add {
+    grid-row: 4 / -1;
+    grid-column: 5 / -1;
+    /* Can be written as grid-area: 4 / 5 / -1 / -1; */
+
+}
+
+#equals {
+    background-color: #2e86c0;
+    color: #fff;
+}
+
+#all-clear {
+    background-color: #b0353a;
+    color: #fff;
+}
