@@ -1,9 +1,10 @@
 /*GENERAL STYLES*/
 
-* {
+*, *::before, *::after {
   -moz-box-sizing: border-box; /* Firexfox */
   -webkit-box-sizing: border-box; /* Safari/Chrome/iOS/Android */
   box-sizing: border-box; /* IE */
+  font-family: helvetica, sans-serif;
 }
 
 .clearfix:after {
@@ -13,11 +14,11 @@
 }
 
 body {
-	font-family: helvetica, 'Lato', sans-serif;
+	font-family: helvetica, sans-serif;
 	padding: 0;
 	margin: 0;
 	font-size: 1rem;
-	background: #fff;
+	background: linear-gradient(to right, rgb(255, 255, 255), rgb(151, 255, 194));
 	counter-reset: section;
 }
 
@@ -32,15 +33,27 @@ body {
 }
 
 #calc-display {
-    height: 80px;
-    margin: 0;
-    padding: 5px 10px;
     display: flex;
-    justify-content: flex-end;
-    align-items: center;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-end;
+    min-height: 90px;
+    max-height: 100%;
+    margin: 0;
+    padding: 5px 10px;    
     background-color: #252525;
     color: #fff;
     font-size: 2rem;
+}
+
+#previous-operand {
+    font-size: 0.9rem;
+}
+
+#current-operand {
+    font-size: 2rem;
+    word-wrap: break-word;
+    word-break: break-all;
 }
 
 button {
@@ -52,7 +65,7 @@ button {
     background-color: #fff;
     outline-color: pink;
     font-family: sans-serif;
-    font-size: 1rem;
+    font-size: 1.5rem;
     transition: background 100ms ease-in-out;
 
     -webkit-appearance: none;
