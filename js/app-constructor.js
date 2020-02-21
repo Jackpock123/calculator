@@ -21,11 +21,18 @@ Calculator.prototype = {
     },
 
     appendNumber: function(number) {
-        this.currentOperand = this.currentOperand + number;
+        if (number === '.' && this.currentOperand.includes('.')) return;
+        this.currentOperand = this.currentOperand.toString() + number.toString();
     },
 
     chooseOperation: function(operation) {
-
+        if( this.currentOperand === '') return
+        if(this.previousOperand !== '') {
+            this.compute();
+        }
+        this.operation = operation;
+        this.previousOperand = this.currentOperand + ' ' + this.operation;
+        this.currentOperand = ''; 
     },
 
     compute: function() {
@@ -34,6 +41,7 @@ Calculator.prototype = {
     
     updateDisplay: function() {
         this.currentOperandElement.innerText = this.currentOperand;
+        this.previousOperandElement.innerText = this.previousOperand;
     }
 
 }
@@ -57,6 +65,14 @@ const calculator = new Calculator(previousOperandElement, currentOperandElement)
 numberButtons.forEach( button => {
     button.addEventListener('click', function () {
         calculator.appendNumber(button.value);
+        calculator.updateDisplay();
+    })
+});
+
+operationButtons.forEach(operation => {
+    operation.addEventListener('click', function() {
+        // console.log(operation.value);
+        calculator.chooseOperation(operation.value);
         calculator.updateDisplay();
     })
 });

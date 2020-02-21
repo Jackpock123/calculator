@@ -22,12 +22,27 @@ class Calculator {
     }
 
     appendNumber(number) {
-        // The number has been passed in as an arguement from the button.addEventListener
-        this.currentOperand = this.currentOperand + number;
+        // Number is passed in as an arguement from the button.addEventListener
+        // Verify if currentOperand already contains a decimal point
+        if (number === '.' && this.currentOperand.includes('.')) return;
+        // Verify numbers are strings with toString()
+        this.currentOperand = this.currentOperand.toString() + number.toString();
     }
 
     chooseOperation(operation) {
-
+        // Number is passed in from the operation.addEventListener
+        // Add check in to stop code if there is no currentOperand
+        if(this.currentOperand === '') return
+        // Check if there is anything in previousOperand. If yes call compute() 
+        if(this.previousOperand !== '') {
+            this.compute();
+        }
+        this.operation = operation;
+        this.previousOperand = this.currentOperand + ' ' + this.operation;
+        this.currentOperand = '';   
+        //console.log(this.previousOperand); 
+        
+        
     }
 
     compute() {
@@ -37,6 +52,7 @@ class Calculator {
     updateDisplay() {
         // The string in the calculator object is inserted into the currentOperand output
         this.currentOperandElement.innerText = this.currentOperand;
+        this.previousOperandElement.innerText = this.previousOperand;
     }
 
 } 
@@ -70,6 +86,13 @@ numberButtons.forEach(button => {
     })    
 });
 
+operationButtons.forEach(operation => {
+    operation.addEventListener('click', function() {
+        // console.log(operation.value);
+        calculator.chooseOperation(operation.value);
+        calculator.updateDisplay();
+    })
+});
 
 
 
