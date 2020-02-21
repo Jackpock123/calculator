@@ -1,4 +1,13 @@
-// 1. Define calculator variables
+// Method using class syntax
+// Create Calculator class to store data
+
+class Calculator {
+    constructor(previousOperandElement, currentOperandElement)
+} 
+
+
+
+// Define calculator variables
 
 const numberButtons = document.querySelectorAll('[data-number]')
 const operationButtons = document.querySelectorAll('[data-operation]')
@@ -9,8 +18,8 @@ const allClearButton = document.querySelectorAll('[data-all-clear]')
 const memoryRecallButton = document.querySelectorAll('[data-memory-recall]')
 const memorySaveButton = document.querySelectorAll('[data-memory-save]')
 const memoryClearButton = document.querySelectorAll('[data-memory-clear]')
-const previousOperandOutput = document.querySelectorAll('[data-previous-operand]')
-const currentOperandOutput = document.querySelectorAll('[data-previous-operand]')
+const previousOperandElement = document.querySelectorAll('[data-previous-operand]')
+const currentOperandElement = document.querySelectorAll('[data-previous-operand]')
 
 
 
