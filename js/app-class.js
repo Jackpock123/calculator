@@ -15,13 +15,14 @@ class Calculator {
         this.previousOperand = '';
         this.currentOperand = '';
         this.operation = undefined;
-        console.log(this.previousOperand);
-        console.log(this.currentOperand);
-        console.log(this.operation);
+        // console.log(this.previousOperand);
+        // console.log(this.currentOperand);
+        // console.log(this.operation);
     }
 
     delete() {
-
+        // Do not need to split the string to slice()
+        this.currentOperand = this.currentOperand.toString().slice(0, -1)
     }
 
     appendNumber(number) {
@@ -151,7 +152,11 @@ allClearButton.addEventListener('click', function() {
     calculator.updateDisplay();
 })
 
-
+deleteButton.addEventListener('click', function() {
+    // alert('delete is clicked');
+    calculator.delete();
+    calculator.updateDisplay();
+})
 
 
 
