@@ -29,6 +29,7 @@ Calculator.prototype = {
         if( this.currentOperand === '') return
         if(this.previousOperand !== '') {
             this.compute();
+            return
         }
         this.operation = operation;
         this.previousOperand = this.currentOperand;
@@ -106,4 +107,10 @@ equalsButton.addEventListener('click', function() {
     // alert('I am clicked');
     calculator.compute()
     calculator.updateDisplay()
+});
+
+allClearButton.addEventListener('click', function() {
+    // alert('allClear is clicked');
+    calculator.clear();
+    calculator.updateDisplay();
 });

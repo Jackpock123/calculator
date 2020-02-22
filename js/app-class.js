@@ -15,6 +15,9 @@ class Calculator {
         this.previousOperand = '';
         this.currentOperand = '';
         this.operation = undefined;
+        console.log(this.previousOperand);
+        console.log(this.currentOperand);
+        console.log(this.operation);
     }
 
     delete() {
@@ -35,17 +38,24 @@ class Calculator {
         if(this.currentOperand === '') return
         // Check if there is anything in previousOperand. If yes call compute() 
         if(this.previousOperand !== '') {
+            console.log('The previous operand is not an empty string');
             this.compute();
+            // Use return here so next statements doesn't reset operation value
+            return
         }
         this.operation = operation;
         this.previousOperand = this.currentOperand;
         this.currentOperand = '';   
-        //console.log(this.previousOperand); 
-        
-        
+    
+        // console.log(this.previousOperand);
+        // console.log(this.currentOperand);
+        // console.log(this.operation);
     }
 
     compute() {
+        alert('calling the compute method');
+        console.log(this.previousOperand);
+        console.log(this.currentOperand);
         // Declare variable which will be our computed value
         // Note to self, make sure you spell variables correctly! 
         let calculatedValue
@@ -54,9 +64,9 @@ class Calculator {
         const current = parseFloat(this.currentOperand);        
         // If either is NaN then exit function
         if (isNaN(prev) || isNaN(current)) return
-        // console.log(prev);
-        // console.log(current);
-        // console.log(this.operation);
+        console.log(prev);
+        console.log(current);
+        console.log(this.operation);
         // Depending on our operator value, compute calculatedValue
         switch (this.operation) {
             case '%':
@@ -65,7 +75,7 @@ class Calculator {
             case '/':
                 calculatedValue = prev / current
                 break
-            case 'x':
+            case '*':
                 calculatedValue = prev * current
                 break
             case '-':
@@ -76,6 +86,7 @@ class Calculator {
                 break
             default: return                
         }
+        console.log(calculatedValue);
         this.currentOperand = calculatedValue;
         this.previousOperand = '';
         this.operation = undefined;
@@ -129,9 +140,15 @@ operationButtons.forEach(operation => {
 });
 
 equalsButton.addEventListener('click', function() {
-    // alert('I am clicked');
-    calculator.compute()
-    calculator.updateDisplay()
+    // alert('Equals is clicked');
+    calculator.compute();
+    calculator.updateDisplay();
+});
+
+allClearButton.addEventListener('click', function() {
+    // alert('allClear is clicked');
+    calculator.clear();
+    calculator.updateDisplay();
 })
 
 
@@ -156,36 +173,36 @@ equalsButton.addEventListener('click', function() {
 
 // Get value using an event listener.
 
-var UI = {};
+// var UI = {};
 
-UI.selectClick = function() {
-    [...document.querySelectorAll('.number-input-js')].forEach(function(node) {
-        node.addEventListener('click', function() {
-            // alert('I have been clicked baby!')
-            let selectedNumber = node.value;
-            // console.log(selectedNumber)
-            UI.display(selectedNumber)
-        })
-    })    
-}
-UI.selectClick();
+// UI.selectClick = function() {
+//     [...document.querySelectorAll('.number-input-js')].forEach(function(node) {
+//         node.addEventListener('click', function() {
+//             // alert('I have been clicked baby!')
+//             let selectedNumber = node.value;
+//             // console.log(selectedNumber)
+//             UI.display(selectedNumber)
+//         })
+//     })    
+// }
+// UI.selectClick();
 
 // The problem with this display function is that it resets with each click event i.e. only concatenates 
 // the empty string and selectedNumber value    
-UI.display = function(selectedNumber) {
-    let numberStr = "";
-    let displayArr = [];
+// UI.display = function(selectedNumber) {
+//     let numberStr = "";
+//     let displayArr = [];
 
-    if(Number.isInteger(parseInt(selectedNumber)) || selectedNumber === '.') {
-        // alert('I am a number or dot!')
-        numberStr = numberStr + selectedNumber;
-        displayArr.push(selectedNumber);
-    }
-    console.log(numberStr);
-    console.log(displayArr);
-}
+//     if(Number.isInteger(parseInt(selectedNumber)) || selectedNumber === '.') {
+//         // alert('I am a number or dot!')
+//         numberStr = numberStr + selectedNumber;
+//         displayArr.push(selectedNumber);
+//     }
+//     console.log(numberStr);
+//     console.log(displayArr);
+// }
 
-UI.display();
+// UI.display();
 
 // Display current number on display
 
