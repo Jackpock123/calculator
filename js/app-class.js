@@ -38,7 +38,7 @@ class Calculator {
             this.compute();
         }
         this.operation = operation;
-        this.previousOperand = this.currentOperand + ' ' + this.operation;
+        this.previousOperand = this.currentOperand;
         this.currentOperand = '';   
         //console.log(this.previousOperand); 
         
@@ -46,7 +46,39 @@ class Calculator {
     }
 
     compute() {
-
+        // Declare variable which will be our computed value
+        // Note to self, make sure you spell variables correctly! 
+        let calculatedValue
+        // Convert string into number
+        const prev = parseFloat(this.previousOperand);        
+        const current = parseFloat(this.currentOperand);        
+        // If either is NaN then exit function
+        if (isNaN(prev) || isNaN(current)) return
+        // console.log(prev);
+        // console.log(current);
+        // console.log(this.operation);
+        // Depending on our operator value, compute calculatedValue
+        switch (this.operation) {
+            case '%':
+                calculatedValue = prev % current
+                break
+            case '/':
+                calculatedValue = prev / current
+                break
+            case 'x':
+                calculatedValue = prev * current
+                break
+            case '-':
+                calculatedValue = prev - current
+                break
+            case '+':
+                calculatedValue = prev + current
+                break
+            default: return                
+        }
+        this.currentOperand = calculatedValue;
+        this.previousOperand = '';
+        this.operation = undefined;
     }
 
     updateDisplay() {
@@ -78,10 +110,11 @@ const calculator = new Calculator(previousOperandElement, currentOperandElement)
 
 numberButtons.forEach(button => {
     button.addEventListener('click', function() {
-        console.log(button.value)
+        // console.log(button.value)
         // Pass arguement into appendNumber method for calculator object
         // Used button.value instead of .innerText --> surplus code in HTML? 
         calculator.appendNumber(button.value);
+        // console.log(button.value);
         calculator.updateDisplay();
     })    
 });
@@ -90,9 +123,16 @@ operationButtons.forEach(operation => {
     operation.addEventListener('click', function() {
         // console.log(operation.value);
         calculator.chooseOperation(operation.value);
+        // console.log(operation.value);
         calculator.updateDisplay();
     })
 });
+
+equalsButton.addEventListener('click', function() {
+    // alert('I am clicked');
+    calculator.compute()
+    calculator.updateDisplay()
+})
 
 
 

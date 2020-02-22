@@ -31,12 +31,37 @@ Calculator.prototype = {
             this.compute();
         }
         this.operation = operation;
-        this.previousOperand = this.currentOperand + ' ' + this.operation;
+        this.previousOperand = this.currentOperand;
         this.currentOperand = ''; 
     },
 
     compute: function() {
+        let calculatedValue
+        const prev = parseFloat(this.previousOperand);        
+        const current = parseFloat(this.currentOperand);        
 
+        if (isNaN(prev) || isNaN(current)) return
+        switch (this.operation) {
+            case '%':
+                calculatedValue = prev % current
+                break
+            case '/':
+                calculatedValue = prev / current
+                break
+            case '*':
+                calculatedValue = prev * current
+                break
+            case '-':
+                calculatedValue = prev - current
+                break
+            case '+':
+                calculatedValue = prev + current
+                break
+            default: return                
+        }
+        this.currentOperand = calculatedValue;
+        this.previousOperand = '';
+        this.operation = undefined;
     },
     
     updateDisplay: function() {
@@ -75,4 +100,10 @@ operationButtons.forEach(operation => {
         calculator.chooseOperation(operation.value);
         calculator.updateDisplay();
     })
+});
+
+equalsButton.addEventListener('click', function() {
+    // alert('I am clicked');
+    calculator.compute()
+    calculator.updateDisplay()
 });
