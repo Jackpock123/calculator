@@ -17,7 +17,7 @@ Calculator.prototype = {
     },
 
     delete: function() {
-
+        this.currentOperand = this.currentOperand.toString().slice(0, -1)
     },
 
     appendNumber: function(number) {
@@ -96,14 +96,22 @@ numberButtons.forEach( button => {
 
 operationButtons.forEach(operation => {
     operation.addEventListener('click', function() {
-        // console.log(operation.value);
         calculator.chooseOperation(operation.value);
         calculator.updateDisplay();
     })
 });
 
 equalsButton.addEventListener('click', function() {
-    // alert('I am clicked');
     calculator.compute()
     calculator.updateDisplay()
 });
+
+allClearButton.addEventListener('click', function() {
+    calculator.clear();
+    calculator.updateDisplay();
+});
+
+deleteButton.addEventListener('click', function() {
+    calculator.delete();
+    calculator.updateDisplay();
+})
