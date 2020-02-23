@@ -12,7 +12,7 @@ function Calculator (previousOperandElement, currentOperandElement) {
 Calculator.prototype = {
     clear: function() {
         this.previousOperand = '';
-        this.currentOperand = '';
+        this.currentOperand = '0';
         this.operation = undefined;
     },
 
@@ -22,7 +22,17 @@ Calculator.prototype = {
 
     appendNumber: function(number) {
         if (number === '.' && this.currentOperand.includes('.')) return;
-        this.currentOperand = this.currentOperand.toString() + number.toString();
+        if (number === '0' && this.currentOperand === '0') return;
+        if (number === '.') {
+            this.currentOperand = this.currentOperand.toString() + number.toString();
+            return           
+        }
+        if (this.currentOperand !== '0' || this.currentOperand.length > 1) {
+            this.currentOperand = this.currentOperand.toString() + number.toString();
+        }
+        if (this.currentOperand === '0' && this.currentOperand.length === 1) {
+            this.currentOperand = number.toString();
+        }
     },
 
     chooseOperation: function(operation) {

@@ -13,7 +13,7 @@ class Calculator {
     clear() {
         // Set both operands as empty strings
         this.previousOperand = '';
-        this.currentOperand = '';
+        this.currentOperand = '0';
         this.operation = undefined;
         // console.log(this.previousOperand);
         // console.log(this.currentOperand);
@@ -27,10 +27,22 @@ class Calculator {
 
     appendNumber(number) {
         // Number is passed in as an arguement from the button.addEventListener
-        // Verify if currentOperand already contains a decimal point
-        if (number === '.' && this.currentOperand.includes('.')) return;
         // Verify numbers are strings with toString()
-        this.currentOperand = this.currentOperand.toString() + number.toString();
+        // Check if currentOperand already contains a decimal point
+        if (number === '.' && this.currentOperand.includes('.')) return;
+        // Check to limit 0 before decimal to 1
+        if (number === '0' && this.currentOperand === '0') return;
+        // Now we know currentOperand !include('.') define behaviour of decimal value 
+        if (number === '.') {
+            this.currentOperand = this.currentOperand.toString() + number.toString();
+            return           
+        }
+        if (this.currentOperand !== '0' || this.currentOperand.length > 1) {
+            this.currentOperand = this.currentOperand.toString() + number.toString();
+        }
+        if (this.currentOperand === '0' && this.currentOperand.length === 1) {
+            this.currentOperand = number.toString();
+        }
     }
 
     chooseOperation(operation) {
@@ -40,6 +52,8 @@ class Calculator {
         // Check if there is anything in previousOperand. If yes call compute() 
         if(this.previousOperand !== '') {
             this.compute();
+            // Add return function to stop following code overwriting calculated values
+            return
         }
         this.operation = operation;
         this.previousOperand = this.currentOperand;
@@ -69,7 +83,7 @@ class Calculator {
             case '/':
                 calculatedValue = prev / current
                 break
-            case 'x':
+            case '*':
                 calculatedValue = prev * current
                 break
             case '-':
@@ -137,6 +151,11 @@ equalsButton.addEventListener('click', function() {
     calculator.compute()
     calculator.updateDisplay()
 })
+
+allClearButton.addEventListener('click', function() {
+    calculator.clear();
+    calculator.updateDisplay();
+});
 
 deleteButton.addEventListener('click', function() {
     // alert('delete is clicked');
