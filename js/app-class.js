@@ -26,28 +26,50 @@ class Calculator {
 
     appendNumber(number) {
         // Number is passed in as an arguement from the button.addEventListener
-        // Verify numbers are strings with toString()        
-        // Check if currentOperand already contains a decimal point
-        if (number === '.' && this.currentOperand.includes('.')) return;
-        // Check to limit 0 before decimal to 1
-        if (number === '0' && this.currentOperand === '0') return;
-        // If a calculation has just been completed this will execute and reset boolean to false.
+        // Verify numbers are strings with toString()
+        
+        // Define behaviour if Boolean === true and number === decimal
+        // If compute() has executed this will execute and reset boolean to false.
+        if(this.calculationBoolean === true && number === '.') {
+            this.currentOperand = '0' + number.toString();
+            this.calculationBoolean = false;
+            // alert('Boolean 1 is true');
+            return
+        }
+        // Define behaviour if Boolean === true and number !== decimal
+        // If compute() has executed this will execute and reset boolean to false.
         if(this.calculationBoolean === true) {
             this.currentOperand = number.toString();
             this.calculationBoolean = false;
+            // alert('Boolean 2 is true');
             return
         }
-        // Now we know currentOperand !include('.') define behaviour of decimal value 
+
+        // Define behaviour if Boolean === false
+        // Check if currentOperand already contains a decimal point
+        if (number === '.' && this.currentOperand.includes('.')) return;
+        // Check to limit 0s before decimal to 1
+        if (number === '0' && this.currentOperand === '0') return;
+
+        // Now we know currentOperand !include('.') define behaviour of decimal value
+        // Case when this.currentOperand === undefined after this operation is selected by user     
+        if (number === '.' && this.currentOperand === '') {
+            this.currentOperand = '0' + number.toString();
+            return           
+        }
+        // Case if decimal is selected
         if (number === '.') {
             this.currentOperand = this.currentOperand.toString() + number.toString();
             return           
         }
-        if (this.currentOperand !== '0' || this.currentOperand.length > 1) {
+        // Case where number !== 0 is selected
+        if (this.currentOperand !== '0') {
             this.currentOperand = this.currentOperand.toString() + number.toString();
         }
+        // Case when first number is selected and number !== decimal
         if (this.currentOperand === '0' && this.currentOperand.length === 1) {
             this.currentOperand = number.toString();
-        }        
+        }
     }
 
     chooseOperation(operation) {
@@ -103,6 +125,7 @@ class Calculator {
         this.operation = undefined;
         // Set out flag to true as calculation has been executed
         this.calculationBoolean = true;
+        // console.log(this.currentOperand); 
     }
 
     updateDisplay() {
@@ -112,12 +135,13 @@ class Calculator {
         // console.log('operation: ', this.operation);
         // console.log('currentOperand: ', this.currentOperand);
         if(this.operation != null) {
-            this.previousOperandElement.innerText = `${this.previousOperand} ${this.operation}`;
+            this.previousOperandElement.innerText = 
+            `${this.previousOperand} ${this.operation}`;
         }
         if (this.operation == null) {
             this.previousOperandElement.innerText = '';
         }
-    }
+    }    
 
 } 
 

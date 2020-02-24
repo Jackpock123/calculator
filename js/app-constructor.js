@@ -22,18 +22,28 @@ Calculator.prototype = {
     },
 
     appendNumber: function(number) {
-        if (number === '.' && this.currentOperand.includes('.')) return;
-        if (number === '0' && this.currentOperand === '0') return;
+        if(this.calculationBoolean === true && number === '.') {
+            this.currentOperand = '0' + number.toString();
+            this.calculationBoolean = false;
+            return
+        }
         if(this.calculationBoolean === true) {
             this.currentOperand = number.toString();
             this.calculationBoolean = false;
             return
         }
+        if (number === '.' && this.currentOperand.includes('.')) return;
+        if (number === '0' && this.currentOperand === '0') return;
+
+        if (number === '.' && this.currentOperand === '') {
+            this.currentOperand = '0' + number.toString();
+            return           
+        }
         if (number === '.') {
             this.currentOperand = this.currentOperand.toString() + number.toString();
             return           
         }
-        if (this.currentOperand !== '0' || this.currentOperand.length > 1) {
+        if (this.currentOperand !== '0') {
             this.currentOperand = this.currentOperand.toString() + number.toString();
         }
         if (this.currentOperand === '0' && this.currentOperand.length === 1) {
@@ -83,7 +93,12 @@ Calculator.prototype = {
     
     updateDisplay: function() {
         this.currentOperandElement.innerText = this.currentOperand;
-        this.previousOperandElement.innerText = this.previousOperand;
+        if(this.operation != null) {
+            this.previousOperandElement.innerText = `${this.previousOperand} ${this.operation}`;
+        }
+        if (this.operation == null) {
+            this.previousOperandElement.innerText = '';
+        }
     }
 
 }
