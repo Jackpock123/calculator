@@ -22,7 +22,11 @@ Calculator.prototype = {
     },
 
     delete: function() {
-        this.currentOperand = this.currentOperand.toString().slice(0, -1)
+        this.currentOperand = this.currentOperand.toString().slice(0, -1);
+    },
+
+    reverseSign: function() {
+        this.currentOperand = this.currentOperand * -1;
     },
 
     appendNumber: function(number) {
@@ -114,6 +118,7 @@ const equalsButton = document.querySelector('[data-equals]')
 const deleteButton = document.querySelector('[data-delete]')
 const clearEntryButton = document.querySelector('[data-clear-entry]')
 const allClearButton = document.querySelector('[data-all-clear]')
+const signButton = document.querySelector('[data-sign]')
 const memoryRecallButton = document.querySelector('[data-memory-recall]')
 const memorySaveButton = document.querySelector('[data-memory-save]')
 const memoryClearButton = document.querySelector('[data-memory-clear]')
@@ -155,5 +160,11 @@ clearEntryButton.addEventListener('click', function() {
 
 deleteButton.addEventListener('click', function() {
     calculator.delete();
+    calculator.updateDisplay();
+})
+
+signButton.addEventListener('click', function() {
+    // alert('delete is clicked');
+    calculator.reverseSign();
     calculator.updateDisplay();
 })

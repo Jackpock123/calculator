@@ -28,6 +28,10 @@ class Calculator {
         this.currentOperand = this.currentOperand.toString().slice(0, -1)
     }
 
+    reverseSign() {
+        this.currentOperand = this.currentOperand * -1;
+    }
+
     appendNumber(number) {
         // Number is passed in as an arguement from the button.addEventListener
         // Verify numbers are strings with toString()
@@ -113,10 +117,10 @@ class Calculator {
                 calculatedValue = ((prev*10) % (current*10)) / 10;
                 break
             case '/':
-                calculatedValue = prev / current;
+                calculatedValue = (prev*10) / (current*10);
                 break
             case '*':
-                calculatedValue = ((prev*10) * (current*10)) / 10;
+                calculatedValue = ((prev*10) * (current*10)) / 100;
                 break
             case '-':
                 calculatedValue = ((prev*10) - (current*10)) / 10;
@@ -159,6 +163,7 @@ const equalsButton = document.querySelector('[data-equals]')
 const deleteButton = document.querySelector('[data-delete]')
 const clearEntryButton = document.querySelector('[data-clear-entry]')
 const allClearButton = document.querySelector('[data-all-clear]')
+const signButton = document.querySelector('[data-sign]')
 const memoryRecallButton = document.querySelector('[data-memory-recall]')
 const memorySaveButton = document.querySelector('[data-memory-save]')
 const memoryClearButton = document.querySelector('[data-memory-clear]')
@@ -196,19 +201,25 @@ equalsButton.addEventListener('click', function() {
     calculator.updateDisplay()
 })
 
-allClearButton.addEventListener('click', function() {
-    calculator.allClear();
+deleteButton.addEventListener('click', function() {
+    // alert('delete is clicked');
+    calculator.delete();
     calculator.updateDisplay();
-});
+})
 
 clearEntryButton.addEventListener('click', function() {
     calculator.clearEntry();
     calculator.updateDisplay();
 });
 
-deleteButton.addEventListener('click', function() {
+allClearButton.addEventListener('click', function() {
+    calculator.allClear();
+    calculator.updateDisplay();
+});
+
+signButton.addEventListener('click', function() {
     // alert('delete is clicked');
-    calculator.delete();
+    calculator.reverseSign();
     calculator.updateDisplay();
 })
 
