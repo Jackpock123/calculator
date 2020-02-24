@@ -9,10 +9,10 @@ class Calculator {
         // Boolean to flag if computation has just been completed
         this.calculationBoolean = false;
         // Set to default values
-        this.clear();
+        this.allClear();
     }
     // Instance methods --> Will sit in the object's prototype
-    clear() {
+    allClear() {
         // Set both operands as empty strings
         this.previousOperand = '';
         this.currentOperand = '0';
@@ -50,6 +50,8 @@ class Calculator {
         if (number === '.' && this.currentOperand.includes('.')) return;
         // Check to limit 0s before decimal to 1
         if (number === '0' && this.currentOperand === '0') return;
+        // Limit length of string
+        if (this.currentOperand.length > 14) return;
 
         // Now we know currentOperand !include('.') define behaviour of decimal value
         // Case when this.currentOperand === undefined after this operation is selected by user     
@@ -104,19 +106,19 @@ class Calculator {
         // Depending on our operator value, compute calculatedValue
         switch (this.operation) {
             case '%':
-                calculatedValue = (prev*10 % current*10) / 10
+                calculatedValue = ((prev*10) % (current*10)) / 10;
                 break
             case '/':
-                calculatedValue = (prev*10 / current*10) / 10
+                calculatedValue = prev / current;
                 break
             case '*':
-                calculatedValue = (prev*10 * current*10) / 10
+                calculatedValue = ((prev*10) * (current*10)) / 10;
                 break
             case '-':
-                calculatedValue = (prev*10 - current*10) / 10
+                calculatedValue = ((prev*10) - (current*10)) / 10;
                 break
             case '+':
-                calculatedValue = (prev*10 + current*10) / 10
+                calculatedValue = ((prev*10) + (current*10)) / 10;
                 break
             default: return                
         }
@@ -191,7 +193,7 @@ equalsButton.addEventListener('click', function() {
 })
 
 allClearButton.addEventListener('click', function() {
-    calculator.clear();
+    calculator.allClear();
     calculator.updateDisplay();
 });
 

@@ -34,6 +34,7 @@ Calculator.prototype = {
         }
         if (number === '.' && this.currentOperand.includes('.')) return;
         if (number === '0' && this.currentOperand === '0') return;
+        if (this.currentOperand.length > 14) return;
 
         if (number === '.' && this.currentOperand === '') {
             this.currentOperand = '0' + number.toString();
@@ -72,7 +73,7 @@ Calculator.prototype = {
                 calculatedValue = (prev*10 % current*10) / 10
                 break
             case '/':
-                calculatedValue = (prev*10 / current*10) / 10
+                calculatedValue = prev / current
                 break
             case '*':
                 calculatedValue = (prev*10 * current*10) / 10
