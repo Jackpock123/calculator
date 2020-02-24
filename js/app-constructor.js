@@ -4,6 +4,7 @@
 function Calculator (previousOperandElement, currentOperandElement) {
     this.previousOperandElement = previousOperandElement;
     this.currentOperandElement = currentOperandElement;
+    this.calculationBoolean = false;
     this.clear();
 }
 // Set the properties for prototype of Calculator object
@@ -23,6 +24,11 @@ Calculator.prototype = {
     appendNumber: function(number) {
         if (number === '.' && this.currentOperand.includes('.')) return;
         if (number === '0' && this.currentOperand === '0') return;
+        if(this.calculationBoolean === true) {
+            this.currentOperand = number.toString();
+            this.calculationBoolean = false;
+            return
+        }
         if (number === '.') {
             this.currentOperand = this.currentOperand.toString() + number.toString();
             return           
@@ -72,6 +78,7 @@ Calculator.prototype = {
         this.currentOperand = calculatedValue;
         this.previousOperand = '';
         this.operation = undefined;
+        this.calculationBoolean = true;
     },
     
     updateDisplay: function() {

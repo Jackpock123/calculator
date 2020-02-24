@@ -6,6 +6,8 @@ class Calculator {
     constructor(previousOperandElement, currentOperandElement) {
         this.previousOperandElement = previousOperandElement;
         this.currentOperandElement = currentOperandElement;
+        // Boolean to flag if computation has just been completed
+        this.calculationBoolean = false;
         // Set to default values
         this.clear();
     }
@@ -15,9 +17,6 @@ class Calculator {
         this.previousOperand = '';
         this.currentOperand = '0';
         this.operation = undefined;
-        // console.log(this.previousOperand);
-        // console.log(this.currentOperand);
-        // console.log(this.operation);
     }
 
     delete() {
@@ -27,11 +26,17 @@ class Calculator {
 
     appendNumber(number) {
         // Number is passed in as an arguement from the button.addEventListener
-        // Verify numbers are strings with toString()
+        // Verify numbers are strings with toString()        
         // Check if currentOperand already contains a decimal point
         if (number === '.' && this.currentOperand.includes('.')) return;
         // Check to limit 0 before decimal to 1
         if (number === '0' && this.currentOperand === '0') return;
+        // If a calculation has just been completed this will execute and reset boolean to false.
+        if(this.calculationBoolean === true) {
+            this.currentOperand = number.toString();
+            this.calculationBoolean = false;
+            return
+        }
         // Now we know currentOperand !include('.') define behaviour of decimal value 
         if (number === '.') {
             this.currentOperand = this.currentOperand.toString() + number.toString();
@@ -42,7 +47,7 @@ class Calculator {
         }
         if (this.currentOperand === '0' && this.currentOperand.length === 1) {
             this.currentOperand = number.toString();
-        }
+        }        
     }
 
     chooseOperation(operation) {
@@ -58,8 +63,7 @@ class Calculator {
         this.operation = operation;
         this.previousOperand = this.currentOperand;
         this.currentOperand = '';   
-        //console.log(this.previousOperand); 
-        
+        //console.log(this.previousOperand);        
         
     }
 
@@ -97,12 +101,22 @@ class Calculator {
         this.currentOperand = calculatedValue;
         this.previousOperand = '';
         this.operation = undefined;
+        // Set out flag to true as calculation has been executed
+        this.calculationBoolean = true;
     }
 
     updateDisplay() {
         // The string in the calculator object is inserted into the currentOperand output
         this.currentOperandElement.innerText = this.currentOperand;
-        this.previousOperandElement.innerText = this.previousOperand;
+        // console.log('previousOperand: ', this.previousOperand);
+        // console.log('operation: ', this.operation);
+        // console.log('currentOperand: ', this.currentOperand);
+        if(this.operation != null) {
+            this.previousOperandElement.innerText = `${this.previousOperand} ${this.operation}`;
+        }
+        if (this.operation == null) {
+            this.previousOperandElement.innerText = '';
+        }
     }
 
 } 
@@ -130,7 +144,7 @@ numberButtons.forEach(button => {
     button.addEventListener('click', function() {
         // console.log(button.value)
         // Pass arguement into appendNumber method for calculator object
-        // Used button.value instead of .innerText --> surplus code in HTML? 
+        // Used button.value instead of .innerText --> surplus code in HTML?
         calculator.appendNumber(button.value);
         // console.log(button.value);
         calculator.updateDisplay();
@@ -183,36 +197,36 @@ deleteButton.addEventListener('click', function() {
 
 // Get value using an event listener.
 
-var UI = {};
+// var UI = {};
 
-UI.selectClick = function() {
-    [...document.querySelectorAll('.number-input-js')].forEach(function(node) {
-        node.addEventListener('click', function() {
-            // alert('I have been clicked baby!')
-            let selectedNumber = node.value;
-            // console.log(selectedNumber)
-            UI.display(selectedNumber)
-        })
-    })    
-}
-UI.selectClick();
+// UI.selectClick = function() {
+//     [...document.querySelectorAll('.number-input-js')].forEach(function(node) {
+//         node.addEventListener('click', function() {
+//             // alert('I have been clicked baby!')
+//             let selectedNumber = node.value;
+//             // console.log(selectedNumber)
+//             UI.display(selectedNumber)
+//         })
+//     })    
+// }
+// UI.selectClick();
 
 // The problem with this display function is that it resets with each click event i.e. only concatenates 
 // the empty string and selectedNumber value    
-UI.display = function(selectedNumber) {
-    let numberStr = "";
-    let displayArr = [];
+// UI.display = function(selectedNumber) {
+//     let numberStr = "";
+//     let displayArr = [];
 
-    if(Number.isInteger(parseInt(selectedNumber)) || selectedNumber === '.') {
-        // alert('I am a number or dot!')
-        numberStr = numberStr + selectedNumber;
-        displayArr.push(selectedNumber);
-    }
-    console.log(numberStr);
-    console.log(displayArr);
-}
+//     if(Number.isInteger(parseInt(selectedNumber)) || selectedNumber === '.') {
+//         // alert('I am a number or dot!')
+//         numberStr = numberStr + selectedNumber;
+//         displayArr.push(selectedNumber);
+//     }
+//     console.log(numberStr);
+//     console.log(displayArr);
+// }
 
-UI.display();
+// UI.display();
 
 // Display current number on display
 
