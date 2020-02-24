@@ -104,19 +104,19 @@ class Calculator {
         // Depending on our operator value, compute calculatedValue
         switch (this.operation) {
             case '%':
-                calculatedValue = prev % current
+                calculatedValue = (prev*10 % current*10) / 10
                 break
             case '/':
-                calculatedValue = prev / current
+                calculatedValue = (prev*10 / current*10) / 10
                 break
             case '*':
-                calculatedValue = prev * current
+                calculatedValue = (prev*10 * current*10) / 10
                 break
             case '-':
-                calculatedValue = prev - current
+                calculatedValue = (prev*10 - current*10) / 10
                 break
             case '+':
-                calculatedValue = prev + current
+                calculatedValue = (prev*10 + current*10) / 10
                 break
             default: return                
         }

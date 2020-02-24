@@ -69,19 +69,19 @@ Calculator.prototype = {
         if (isNaN(prev) || isNaN(current)) return
         switch (this.operation) {
             case '%':
-                calculatedValue = prev % current
+                calculatedValue = (prev*10 % current*10) / 10
                 break
             case '/':
-                calculatedValue = prev / current
+                calculatedValue = (prev*10 / current*10) / 10
                 break
             case '*':
-                calculatedValue = prev * current
+                calculatedValue = (prev*10 * current*10) / 10
                 break
             case '-':
-                calculatedValue = prev - current
+                calculatedValue = (prev*10 - current*10) / 10
                 break
             case '+':
-                calculatedValue = prev + current
+                calculatedValue = (prev*10 + current*10) / 10
                 break
             default: return                
         }
