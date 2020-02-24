@@ -18,7 +18,7 @@ body {
 	padding: 0;
 	margin: 0;
 	font-size: 1rem;
-	background: linear-gradient(to right, rgb(255, 255, 255), rgb(151, 255, 194));
+	background: linear-gradient(to right, rgb(255, 255, 255), rgb(46, 134, 192)); 
 	counter-reset: section;
 }
 
@@ -26,7 +26,7 @@ body {
 
 #calculator {
     background-color: antiquewhite;
-    max-width: 300px;
+    max-width: 400px;
     margin: 20px auto;
     padding: 0;
     border-radius: 1%;
@@ -103,11 +103,18 @@ button:active {
 }
 
 #equals {
-    background-color: #2e86c0;
+    background-color: rgb(46, 134, 192);
     color: #fff;
 }
 
 #all-clear {
     background-color: #b0353a;
     color: #fff;
+}
+
+@media only screen and (max-width: 600px) {
+    #calculator {
+        max-width: 100%;
+        margin: 0;
+    }
 }
