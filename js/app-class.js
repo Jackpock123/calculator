@@ -19,6 +19,10 @@ class Calculator {
         this.operation = undefined;
     }
 
+    clearEntry() {
+        // Set currentoperand to 0
+        this.currentOperand = '0';    }
+
     delete() {
         // Do not need to split the string to slice()
         this.currentOperand = this.currentOperand.toString().slice(0, -1)
@@ -194,6 +198,11 @@ equalsButton.addEventListener('click', function() {
 
 allClearButton.addEventListener('click', function() {
     calculator.allClear();
+    calculator.updateDisplay();
+});
+
+clearEntryButton.addEventListener('click', function() {
+    calculator.clearEntry();
     calculator.updateDisplay();
 });
 

@@ -5,16 +5,20 @@ function Calculator (previousOperandElement, currentOperandElement) {
     this.previousOperandElement = previousOperandElement;
     this.currentOperandElement = currentOperandElement;
     this.calculationBoolean = false;
-    this.clear();
+    this.allClear();
 }
 // Set the properties for prototype of Calculator object
 // Equal to setting instance methods within a class. Note different syntax
 
 Calculator.prototype = {
-    clear: function() {
+    allClear: function() {
         this.previousOperand = '';
         this.currentOperand = '0';
         this.operation = undefined;
+    },
+
+    clearEntry: function() {
+        this.currentOperand = '0';
     },
 
     delete: function() {
@@ -140,7 +144,12 @@ equalsButton.addEventListener('click', function() {
 });
 
 allClearButton.addEventListener('click', function() {
-    calculator.clear();
+    calculator.allClear();
+    calculator.updateDisplay();
+});
+
+clearEntryButton.addEventListener('click', function() {
+    calculator.clearEntry();
     calculator.updateDisplay();
 });
 
