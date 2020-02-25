@@ -108,6 +108,16 @@ Calculator.prototype = {
         if (this.operation == null) {
             this.previousOperandElement.innerText = '';
         }
+    },
+
+    recallHistory: function() {
+        let calculationHistory = document.querySelector('.calculation-history');
+        calculationHistory.classList.toggle('history-active');
+        if(calculationHistory.style.display === 'block') {
+            calculationHistory.style.display = 'none';
+        } else {
+            calculationHistory.style.display = 'block';
+        }
     }
 
 }
@@ -119,8 +129,8 @@ const deleteButton = document.querySelector('[data-delete]')
 const clearEntryButton = document.querySelector('[data-clear-entry]')
 const allClearButton = document.querySelector('[data-all-clear]')
 const signButton = document.querySelector('[data-sign]')
-const memoryRecallButton = document.querySelector('[data-memory-recall]')
-const memorySaveButton = document.querySelector('[data-memory-save]')
+const recallHistoryButton = document.querySelector('[data-memory-recall]')
+// const memorySaveButton = document.querySelector('[data-memory-save]')
 const memoryClearButton = document.querySelector('[data-memory-clear]')
 const previousOperandElement = document.querySelector('[data-previous-operand]')
 const currentOperandElement = document.querySelector('[data-current-operand]')
@@ -167,4 +177,9 @@ signButton.addEventListener('click', function() {
     // alert('delete is clicked');
     calculator.reverseSign();
     calculator.updateDisplay();
+})
+
+recallHistoryButton.addEventListener('click', function() {
+    // alert('recallHistoryButton is clicked');
+    calculator.recallHistory();
 })
