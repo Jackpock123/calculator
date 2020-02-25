@@ -15,36 +15,36 @@
             <div data-current-operand id="current-operand">0</div>
         </output>
         
-        <div id="calc-buttons">
-            <button data-memory-recall type="button" id="recall" value="recall" disabled>MR</button>
-            <button data-memory-save type="button" id="save" value="save" disabled>MS</button>
-            <button data-memory-clear type="button" id="clear" value="clear" disabled>MC</button>
-            <button data-operation type="button" id="modulo" value="%">%</button>
-            <button data-operation type="button" id="divide" value="/">÷</button>
+        <section id="calc-buttons">
+            <button data-memory-recall type="button" id="recall" aria-label="recall-calculation-history">MR</button>
+            <button data-memory-save type="button" id="save" aria-label="save" disabled>MS</button>
+            <button data-memory-clear type="button" id="clear" aria-label="clear" disabled>MC</button>
+            <button data-operation type="button" id="modulo" aria-label="modulus-operation">%</button>
+            <button data-operation type="button" id="divide" aria-label="divide-operation">÷</button>
 
-            <button data-delete type="button" id="delete" value="delete">DEL</button>
-            <button data-number type="button" id="seven" value="7">7</button>
-            <button data-number type="button" id="eight" value="8">8</button>
-            <button data-number type="button" id="nine" value="9">9</button>
-            <button data-operation type="button" id="product" value="*">x</button>
+            <button data-delete type="button" id="delete" aria-label="delete">DEL</button>
+            <button data-number type="button" id="seven" aria-label="7">7</button>
+            <button data-number type="button" id="eight" aria-label="8">8</button>
+            <button data-number type="button" id="nine" aria-label="9">9</button>
+            <button data-operation type="button" id="product" aria-label="multiply-operation">x</button>
 
-            <button data-sign type="button" id="sign" value="sign">+/-</button>
-            <button data-number type="button" id="four" value="4">4</button>
-            <button data-number type="button" id="five" value="5">5</button>
-            <button data-number type="button" id="six" value="6">6</button>
-            <button data-operation type="button" id="subtract" value="-">-</button>        
+            <button data-sign type="button" id="sign" aria-label="reverse-sign">+/-</button>
+            <button data-number type="button" id="four" aria-label="4">4</button>
+            <button data-number type="button" id="five" aria-label="5">5</button>
+            <button data-number type="button" id="six" aria-label="6">6</button>
+            <button data-operation type="button" id="subtract" aria-label="subtract-operation">-</button>        
 
-            <button data-clear-entry type="button" id="clear-entry" value="clear-entry">C</button>
-            <button data-number type="button" id="one" value="1">1</button>
-            <button data-number type="button" id="two" value="2">2</button>
-            <button data-number type="button" id="three" value="3">3</button>
-            <button data-operation type="button" id="add" value="+">+</button>
+            <button data-clear-entry type="button" id="clear-entry" aria-label="clear-current-input">C</button>
+            <button data-number type="button" id="one" aria-label="1">1</button>
+            <button data-number type="button" id="two" aria-label="2">2</button>
+            <button data-number type="button" id="three" aria-label="3">3</button>
+            <button data-operation type="button" id="add" aria-label="addition-operation">+</button>
 
-            <button data-all-clear type="button" id="all-clear" value="all-clear">AC</button>
-            <button data-number type="button" id="zero" value="0">0</button>
-            <button data-number type="button" id="decimal" value=".">.</button>
-            <button data-equals type="button" id="equals" value="=">=</button>
-        </div>
+            <button data-all-clear type="button" id="all-clear" aria-label="clear-all-inputs">AC</button>
+            <button data-number type="button" id="zero" aria-label="0">0</button>
+            <button data-number type="button" id="decimal" aria-label=".">.</button>
+            <button data-equals type="button" id="equals" aria-label="equals-operation">=</button>
+        </section>        
         
     </form>
 
