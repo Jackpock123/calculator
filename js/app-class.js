@@ -3,15 +3,43 @@
 
 class Calculator {
     // Instance properties
-    constructor(previousOperandElement, currentOperandElement) {
+    constructor(previousOperandElement, currentOperandElement, element) {
         this.previousOperandElement = previousOperandElement;
         this.currentOperandElement = currentOperandElement;
         // Boolean to flag if computation has just been completed
         this.calculationBoolean = false;
         // Set to default values
         this.allClear();
+        
+        // Properties for historyList
+        this.listElement = element;        
+        this.textList = ['Calculation History:'];        
     }
     // Instance methods --> Will sit in the object's prototype
+    // Methods for calculation history ul
+    static createListItem(text) {
+        const li = document.createElement('li');
+        li.textContent = text;
+        return li;
+    }
+
+    updateList() {
+        // alert('updateList is running')
+        while (this.listElement.firstChild) {
+            this.listElement.removeChild(this.listElement.firstChild);
+        }
+        for(const text of this.textList) {
+            this.listElement.appendChild(Calculator.createListItem(text));
+        }
+    }
+
+    addListItem (calculatedValue) {
+        this.textList.push(`${this.previousOperand} ${this.operation} ${this.currentOperand} = ${calculatedValue}`)
+    }
+    
+    
+    
+    
     allClear() {
         // Set both operands as empty strings
         this.previousOperand = '';
@@ -130,6 +158,9 @@ class Calculator {
                 break
             default: return                
         }
+        // console.log(calculatedValue);
+        this.addListItem(calculatedValue);
+        this.updateList();
         this.currentOperand = calculatedValue;
         this.previousOperand = '';
         this.operation = undefined;
@@ -167,6 +198,8 @@ class Calculator {
 } 
 
 // Define calculator variables
+const previousOperandElement = document.querySelector('[data-previous-operand]')
+const currentOperandElement = document.querySelector('[data-current-operand]')
 
 const numberButtons = document.querySelectorAll('[data-number]')
 const operationButtons = document.querySelectorAll('[data-operation]')
@@ -178,11 +211,11 @@ const signButton = document.querySelector('[data-sign]')
 const recallHistoryButton = document.querySelector('[data-memory-recall]')
 // const memorySaveButton = document.querySelector('[data-memory-save]')
 const memoryClearButton = document.querySelector('[data-memory-clear]')
-const previousOperandElement = document.querySelector('[data-previous-operand]')
-const currentOperandElement = document.querySelector('[data-current-operand]')
+
+const myList = document.querySelector('[data-history-list]')
 
 // Create a new instance of Calculator called calculator
-const calculator = new Calculator(previousOperandElement, currentOperandElement);
+const calculator = new Calculator(previousOperandElement, currentOperandElement, myList);
 
 // Add event listeners
 
