@@ -15,7 +15,7 @@
             <div data-current-operand id="current-operand">0</div>
         </output>
         
-        <section id="calc-buttons">
+        <div id="calc-buttons">
             <button data-memory-recall type="button" id="recall" aria-label="recall-calculation-history">MR</button>
             <button data-memory-save type="button" id="save" aria-label="save" disabled>MS</button>
             <button data-memory-clear type="button" id="clear" aria-label="clear" disabled>MC</button>
@@ -44,9 +44,17 @@
             <button data-number type="button" id="zero" aria-label="0">0</button>
             <button data-number type="button" id="decimal" aria-label=".">.</button>
             <button data-equals type="button" id="equals" aria-label="equals-operation">=</button>
-        </section>        
-        
-    </form>
+        </div>
+
+        <div class="calculation-history">
+            <ul>
+                <li>1.</li>
+                <li>2.</li>
+                <li>3.</li>
+            </ul>
+        </div>
+
+    </form>    
 
 <!-- <script src="/js/app-class.js"></script> -->
 <script src="/js/app-constructor.js"></script>
