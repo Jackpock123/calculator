@@ -80,11 +80,11 @@ Calculator.prototype = {
             case '%':
                 calculatedValue = (prev*10 % current*10) / 10
                 break
-            case '/':
+            case '÷':
                 calculatedValue = prev / current
                 break
-            case '*':
-                calculatedValue = (prev*10 * current*10) / 10
+            case 'x':
+                calculatedValue = (prev*10 * current*10) / 100
                 break
             case '-':
                 calculatedValue = (prev*10 - current*10) / 10
@@ -131,14 +131,14 @@ const calculator = new Calculator(previousOperandElement, currentOperandElement)
 
 numberButtons.forEach( button => {
     button.addEventListener('click', function () {
-        calculator.appendNumber(button.value);
+        calculator.appendNumber(button.innerText);
         calculator.updateDisplay();
     })
 });
 
 operationButtons.forEach(operation => {
     operation.addEventListener('click', function() {
-        calculator.chooseOperation(operation.value);
+        calculator.chooseOperation(operation.innerText);
         calculator.updateDisplay();
     })
 });

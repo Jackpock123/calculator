@@ -116,10 +116,10 @@ class Calculator {
             case '%':
                 calculatedValue = ((prev*10) % (current*10)) / 10;
                 break
-            case '/':
+            case '÷':
                 calculatedValue = (prev*10) / (current*10);
                 break
-            case '*':
+            case 'x':
                 calculatedValue = ((prev*10) * (current*10)) / 100;
                 break
             case '-':
@@ -180,17 +180,16 @@ numberButtons.forEach(button => {
         // console.log(button.value)
         // Pass arguement into appendNumber method for calculator object
         // Used button.value instead of .innerText --> surplus code in HTML?
-        calculator.appendNumber(button.value);
-        // console.log(button.value);
+        calculator.appendNumber(button.innerText);
+        // console.log(button.innerText);
         calculator.updateDisplay();
     })    
 });
 
 operationButtons.forEach(operation => {
     operation.addEventListener('click', function() {
-        // console.log(operation.value);
-        calculator.chooseOperation(operation.value);
-        // console.log(operation.value);
+        calculator.chooseOperation(operation.innerText);
+        // console.log(operation.innerText);
         calculator.updateDisplay();
     })
 });
