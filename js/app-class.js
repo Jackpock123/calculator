@@ -15,12 +15,23 @@ class Calculator {
         this.listElement = element;        
         this.textList = ['Calculation History:'];        
     }
-    // Instance methods --> Will sit in the object's prototype
+    // **Instance methods** --> Will sit in the object's prototype
     // Methods for calculation history ul
     static createListItem(text) {
         const li = document.createElement('li');
         li.textContent = text;
         return li;
+    }
+
+    // Helper function to display calculation history
+    recallHistory() {
+        let calculationHistory = document.querySelector('.calculation-history');
+        calculationHistory.classList.toggle('history-active');
+        if(calculationHistory.style.display === 'block') {
+            calculationHistory.style.display = 'none';
+        } else {
+            calculationHistory.style.display = 'block';
+        }
     }
 
     updateList() {
@@ -31,6 +42,10 @@ class Calculator {
         for(const text of this.textList) {
             this.listElement.appendChild(Calculator.createListItem(text));
         }
+    }
+
+    clearList() {
+        this.textList = ['Calculation History:'];
     }
 
     addListItem (calculatedValue) {
@@ -182,18 +197,7 @@ class Calculator {
         if (this.operation == null) {
             this.previousOperandElement.innerText = '';
         }
-    }
-
-    // Helper function to display calculation history
-    recallHistory() {
-        let calculationHistory = document.querySelector('.calculation-history');
-        calculationHistory.classList.toggle('history-active');
-        if(calculationHistory.style.display === 'block') {
-            calculationHistory.style.display = 'none';
-        } else {
-            calculationHistory.style.display = 'block';
-        }
-    }
+    }    
 
 } 
 
@@ -208,10 +212,10 @@ const deleteButton = document.querySelector('[data-delete]')
 const clearEntryButton = document.querySelector('[data-clear-entry]')
 const allClearButton = document.querySelector('[data-all-clear]')
 const signButton = document.querySelector('[data-sign]')
-const recallHistoryButton = document.querySelector('[data-memory-recall]')
-// const memorySaveButton = document.querySelector('[data-memory-save]')
-const memoryClearButton = document.querySelector('[data-memory-clear]')
 
+const recallHistoryButton = document.querySelector('[data-history-recall]')
+// const memorySaveButton = document.querySelector('[data-memory-save]')
+const clearHistoryButton = document.querySelector('[data-history-clear]')
 const myList = document.querySelector('[data-history-list]')
 
 // Create a new instance of Calculator called calculator
@@ -269,6 +273,12 @@ signButton.addEventListener('click', function() {
 recallHistoryButton.addEventListener('click', function() {
     // alert('recallHistoryButton is clicked');
     calculator.recallHistory();
+})
+
+clearHistoryButton.addEventListener('click', function() {
+    // alert('clearList is clicked');
+    calculator.clearList();
+    calculator.updateList();
 })
 
 

@@ -13,16 +13,20 @@ function Calculator (previousOperandElement, currentOperandElement, element) {
 // Equal to setting instance methods within a class. Note different syntax
 
 Calculator.prototype = {
-    allClear: function() {
-        this.previousOperand = '';
-        this.currentOperand = '0';
-        this.operation = undefined;
-    },
-
     createListItem: function(text) {
         const li = document.createElement('li');
         li.textContent = text;
         return li;
+    },
+
+    recallHistory: function() {
+        let calculationHistory = document.querySelector('.calculation-history');
+        calculationHistory.classList.toggle('history-active');
+        if(calculationHistory.style.display === 'block') {
+            calculationHistory.style.display = 'none';
+        } else {
+            calculationHistory.style.display = 'block';
+        }
     },
 
     updateList: function() {
@@ -34,8 +38,21 @@ Calculator.prototype = {
         }
     },
 
+    clearList: function() {
+        this.textList = ['Calculation History:'];
+    },
+
     addListItem: function(calculatedValue) {
         this.textList.push(`${this.previousOperand} ${this.operation} ${this.currentOperand} = ${calculatedValue}`)
+    },
+
+
+
+
+    allClear: function() {
+        this.previousOperand = '';
+        this.currentOperand = '0';
+        this.operation = undefined;
     },
 
     clearEntry: function() {
@@ -131,16 +148,6 @@ Calculator.prototype = {
         if (this.operation == null) {
             this.previousOperandElement.innerText = '';
         }
-    },
-
-    recallHistory: function() {
-        let calculationHistory = document.querySelector('.calculation-history');
-        calculationHistory.classList.toggle('history-active');
-        if(calculationHistory.style.display === 'block') {
-            calculationHistory.style.display = 'none';
-        } else {
-            calculationHistory.style.display = 'block';
-        }
     }
 
 }
@@ -155,10 +162,10 @@ const deleteButton = document.querySelector('[data-delete]')
 const clearEntryButton = document.querySelector('[data-clear-entry]')
 const allClearButton = document.querySelector('[data-all-clear]')
 const signButton = document.querySelector('[data-sign]')
-const recallHistoryButton = document.querySelector('[data-memory-recall]')
-// const memorySaveButton = document.querySelector('[data-memory-save]')
-const memoryClearButton = document.querySelector('[data-memory-clear]')
 
+const recallHistoryButton = document.querySelector('[data-history-recall]')
+// const memorySaveButton = document.querySelector('[data-memory-save]')
+const clearHistoryButton = document.querySelector('[data-history-clear]')
 const myList = document.querySelector('[data-history-list]')
 
 const calculator = new Calculator(previousOperandElement, currentOperandElement, myList);
@@ -199,12 +206,15 @@ deleteButton.addEventListener('click', function() {
 })
 
 signButton.addEventListener('click', function() {
-    // alert('delete is clicked');
     calculator.reverseSign();
     calculator.updateDisplay();
 })
 
 recallHistoryButton.addEventListener('click', function() {
-    // alert('recallHistoryButton is clicked');
     calculator.recallHistory();
+})
+
+clearHistoryButton.addEventListener('click', function() {
+    calculator.clearList();
+    calculator.updateList();
 })
