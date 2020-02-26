@@ -173,14 +173,14 @@ const calculator = new Calculator(previousOperandElement, currentOperandElement,
 
 numberButtons.forEach( button => {
     button.addEventListener('click', function () {
-        calculator.appendNumber(button.innerText);
+        calculator.appendNumber(button.value);
         calculator.updateDisplay();
     })
 });
 
 operationButtons.forEach(operation => {
     operation.addEventListener('click', function() {
-        calculator.chooseOperation(operation.innerText);
+        calculator.chooseOperation(operation.value);
         calculator.updateDisplay();
     })
 });

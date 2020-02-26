@@ -16,41 +16,39 @@
         </output>
         
         <div id="calc-buttons">
-            <button data-memory-recall type="button" id="recall" aria-label="recall-calculation-history">MR</button>
-            <button data-memory-save type="button" id="save" aria-label="save" disabled>MS</button>
-            <button data-memory-clear type="button" id="clear" aria-label="clear" disabled>MC</button>
-            <button data-operation type="button" id="modulo" aria-label="modulus-operation">%</button>
-            <button data-operation type="button" id="divide" aria-label="divide-operation">÷</button>
+            <input data-history-recall type="button" id="recall" value="MR" aria-label="recall-calculation-history">
+            <input data-memory-save type="button" id="save" value="MS" aria-label="save" disabled>
+            <input data-history-clear type="button" id="clear" value="MC" aria-label="clear">
+            <input data-operation type="button" id="modulo" value="%" aria-label="modulus-operation">
+            <input data-operation type="button" id="divide" value="÷" aria-label="divide-operation">
 
-            <button data-delete type="button" id="delete" aria-label="delete">DEL</button>
-            <button data-number type="button" id="seven" aria-label="7">7</button>
-            <button data-number type="button" id="eight" aria-label="8">8</button>
-            <button data-number type="button" id="nine" aria-label="9">9</button>
-            <button data-operation type="button" id="product" aria-label="multiply-operation">x</button>
+            <input data-delete type="button" id="delete" value="DEL" aria-label="delete">
+            <input data-number type="button" id="seven" value="7" aria-label="7">
+            <input data-number type="button" id="eight" value="8" aria-label="8">
+            <input data-number type="button" id="nine" value="9" aria-label="9">
+            <input data-operation type="button" id="product" value="x" aria-label="multiply-operation">
 
-            <button data-sign type="button" id="sign" aria-label="reverse-sign">+/-</button>
-            <button data-number type="button" id="four" aria-label="4">4</button>
-            <button data-number type="button" id="five" aria-label="5">5</button>
-            <button data-number type="button" id="six" aria-label="6">6</button>
-            <button data-operation type="button" id="subtract" aria-label="subtract-operation">-</button>        
+            <input data-sign type="button" id="sign" value="+/-" aria-label="reverse-sign">
+            <input data-number type="button" id="four" value="4" aria-label="4">
+            <input data-number type="button" id="five" value="5" aria-label="5">
+            <input data-number type="button" id="six" value="6" aria-label="6">
+            <input data-operation type="button" id="subtract" value="-" aria-label="subtract-operation">        
 
-            <button data-clear-entry type="button" id="clear-entry" aria-label="clear-current-input">C</button>
-            <button data-number type="button" id="one" aria-label="1">1</button>
-            <button data-number type="button" id="two" aria-label="2">2</button>
-            <button data-number type="button" id="three" aria-label="3">3</button>
-            <button data-operation type="button" id="add" aria-label="addition-operation">+</button>
+            <input data-clear-entry type="button" id="clear-entry" value="C" aria-label="clear-current-input">
+            <input data-number type="button" id="one" value="1" aria-label="1">
+            <input data-number type="button" id="two" value="2" aria-label="2">
+            <input data-number type="button" id="three" value="3" aria-label="3">
+            <input data-operation type="button" id="add" value="+" aria-label="addition-operation">
 
-            <button data-all-clear type="button" id="all-clear" aria-label="clear-all-inputs">AC</button>
-            <button data-number type="button" id="zero" aria-label="0">0</button>
-            <button data-number type="button" id="decimal" aria-label=".">.</button>
-            <button data-equals type="button" id="equals" aria-label="equals-operation">=</button>
+            <input data-all-clear type="button" id="all-clear" value="AC" aria-label="clear-all-inputs">
+            <input data-number type="button" id="zero" value="0" aria-label="0">
+            <input data-number type="button" id="decimal" value="." aria-label=".">
+            <input data-equals type="button" id="equals" value="=" aria-label="equals-operation">
         </div>
 
         <div class="calculation-history">
-            <ul>
-                <li>1.</li>
-                <li>2.</li>
-                <li>3.</li>
+            <ul data-history-list>
+                <!-- To be populated by JS -->
             </ul>
         </div>
 

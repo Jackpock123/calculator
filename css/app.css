@@ -21,9 +21,12 @@ body {
 	counter-reset: section;
 }
 
+h2 {
+    margin-bottom: 5px;
+}
 
-/* Button Styles */
-button {
+/* input Styles */
+input {
     cursor: pointer;
     border: none;
     margin: 0;
@@ -41,16 +44,16 @@ button {
 }
 
 /* I have specified focus styles so that someone navigating without a mouse knows which button is in use */
-button:hover {
+input:hover {
     background-color: #eaeaea;
     outline-color: #eaeaea;
 }
 
-button:focus {
+input:focus {
     outline-color: black;
 }
 
-button:active {
+input:active {
     transform: scale(0.95);
     background-color: #bebbbb;
 }
@@ -116,6 +119,10 @@ button:active {
 .calculation-history {
     display: none;
     padding: 5px;
+}
+
+.calculation-history li {
+    margin-bottom: 5px;
 }
 
 @media only screen and (max-width: 600px) {

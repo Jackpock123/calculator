@@ -227,17 +227,17 @@ numberButtons.forEach(button => {
     button.addEventListener('click', function() {
         // console.log(button.value)
         // Pass arguement into appendNumber method for calculator object
-        // Used button.value instead of .innerText --> surplus code in HTML?
-        calculator.appendNumber(button.innerText);
-        // console.log(button.innerText);
+        // Used button.value instead of .value --> surplus code in HTML?
+        calculator.appendNumber(button.value);
+        // console.log(button.value);
         calculator.updateDisplay();
     })    
 });
 
 operationButtons.forEach(operation => {
     operation.addEventListener('click', function() {
-        calculator.chooseOperation(operation.innerText);
-        // console.log(operation.innerText);
+        calculator.chooseOperation(operation.value);
+        // console.log(operation.value);
         calculator.updateDisplay();
     })
 });
