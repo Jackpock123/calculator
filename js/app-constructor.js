@@ -212,6 +212,7 @@ signButton.addEventListener('click', function() {
 
 recallHistoryButton.addEventListener('click', function() {
     calculator.recallHistory();
+    this.classList.toggle('recall-active-js');
 })
 
 clearHistoryButton.addEventListener('click', function() {
