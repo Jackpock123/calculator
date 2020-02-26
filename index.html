@@ -16,8 +16,7 @@
         </output>
         
         <div id="calc-buttons">
-            <input data-history-recall type="button" id="recall" value="MR" aria-label="recall-calculation-history">
-            <input data-memory-save type="button" id="save" value="MS" aria-label="save" disabled>
+            <button data-history-recall type="button" id="recall" class="recall-js" value="MR" aria-label="recall-calculation-history">MR</button>
             <input data-history-clear type="button" id="clear" value="MC" aria-label="clear">
             <input data-operation type="button" id="modulo" value="%" aria-label="modulus-operation">
             <input data-operation type="button" id="divide" value="÷" aria-label="divide-operation">
@@ -48,14 +47,15 @@
 
         <div class="calculation-history">
             <ul data-history-list>
+                <li>Calculation History:</li>
                 <!-- To be populated by JS -->
             </ul>
         </div>
 
     </form>    
 
-<!-- <script src="/js/app-class.js"></script> -->
-<script src="/js/app-constructor.js"></script>
+<script src="/js/app-class.js"></script>
+<!-- <script src="/js/app-constructor.js"></script> -->
 <!-- <script src="/js/class-tutorial.js"></script> -->
     
 </body>
