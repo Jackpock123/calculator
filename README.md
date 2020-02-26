@@ -23,8 +23,8 @@ I choose this appoach as I was interested in learning more about the class synta
 
 Note there are two JS files. They are identical except for a small difference in syntax:
 
-1. __app.constructor.js (default):__ Refactored code without the class syntax using constructors and prototypes. Created to illustrate differences in syntax with classes. Default due to small issue with following JS file (see Point 6 in Improvements).
-1. __app-class.js:__ This file uses a class function. The comments remain in the code to walk the reviewer though my thought process as I was building the application. 
+1. __app-class.js (default: for review):__ This file uses a class function. The comments remain in the code to walk the reviewer though my thought process as I was building the application. Note there is a small issue with functionality (see Point 6 in Improvements).
+2. __app.constructor.js:__ Refactored code without the class syntax using constructors and prototypes. Created to illustrate differences in syntax with classes. Better functionality than above calculator because of Point 6. View this calculator [here](https://jackpock123.github.io/calculator/calculator-constructor).
 
 ### Resources
 1. [Build A Calculator With JavaScript Tutorial](https://www.youtube.com/watch?v=j59qQ7YWLxw)
@@ -37,7 +37,7 @@ Note there are two JS files. They are identical except for a small difference in
 1. **The application should take a mobile first approach and be responsive for smaller screens.** However, most smaller devices have calculator mobile applications so the typical user would be using a computer.
 2. After reading [this](https://html.com/input-type-button/) article I **decided to use input elements instead of buttons.** As some of the input values were not intuitive I used both *value* and *aria-label* attributes.
 2. **Data types are used to interact with JS and IDs for CSS to seperate out styling and script based behaviour.** Although if the data type or ID changes at a later date the author would have to update both the style and JS sheets. Q: Is this unnecesary or good practice? 
-2. **Semantics:** Input elements with type='button' chosen over button elements. Used a <form> element because the calculator contained [interactive controls for submitting information.](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/form) Used a Aria role='application' to indicate to assisstive technologies that it is a desktop application.
+2. **Semantics:** Input elements with type='button' chosen over button elements. Used a <form> element because the calculator contained [interactive controls for submitting information.](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/form) Used a Aria role='application' to indicate to assistive technologies that it is a desktop application.
 
 ### Accessibility Considerations
 1. **Using a value attribute or innerText to describe button function:** I wanted the equivalent of alt text for images to describe unintuitive button functions such as DEL, AC and MR. I was going to delete the buttons' value attribute as it seemed like surplus code. However, as [this guidance](https://dequeuniversity.com/rules/axe/3.2/button-name) suggested using either an *aria-label* or *value* attribute I decided to proceed using aria labels.
