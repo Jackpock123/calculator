@@ -1,7 +1,8 @@
-// Method using the constructor type or 'blueprint'
+// **Method using the constructor type or 'blueprint'**
+// Step 1. Declare class as blueprint for object which will store data
 
-// Declare the constructor which will hold data
 function Calculator (previousOperandElement, currentOperandElement, element) {
+    // ** Instance properties**
     this.previousOperandElement = previousOperandElement;
     this.currentOperandElement = currentOperandElement;
     this.calculationBoolean = false;
@@ -9,46 +10,9 @@ function Calculator (previousOperandElement, currentOperandElement, element) {
     this.listElement = element;        
     this.textList = ['Calculation History:'];  
 }
-// Set the properties for prototype of Calculator object
+// **Instance prototypes for calculator**
 // Equal to setting instance methods within a class. Note different syntax
-
 Calculator.prototype = {
-    createListItem: function(text) {
-        const li = document.createElement('li');
-        li.textContent = text;
-        return li;
-    },
-
-    recallHistory: function() {
-        let calculationHistory = document.querySelector('.calculation-history');
-        calculationHistory.classList.toggle('history-active');
-        if(calculationHistory.style.display === 'block') {
-            calculationHistory.style.display = 'none';
-        } else {
-            calculationHistory.style.display = 'block';
-        }
-    },
-
-    updateList: function() {
-        while (this.listElement.firstChild) {
-            this.listElement.removeChild(this.listElement.firstChild);
-        }
-        for(const text of this.textList) {
-            this.listElement.appendChild(this.createListItem(text));
-        }
-    },
-
-    clearList: function() {
-        this.textList = ['Calculation History:'];
-    },
-
-    addListItem: function(calculatedValue) {
-        this.textList.push(`${this.previousOperand} ${this.operation} ${this.currentOperand} = ${calculatedValue}`)
-    },
-
-
-
-
     allClear: function() {
         this.previousOperand = '';
         this.currentOperand = '0';
@@ -148,13 +112,47 @@ Calculator.prototype = {
         if (this.operation == null) {
             this.previousOperandElement.innerText = '';
         }
+    },
+
+    // **Instance prototypes to create calculation history ul**
+    createListItem: function(text) {
+        const li = document.createElement('li');
+        li.textContent = text;
+        return li;
+    },
+
+    recallHistory: function() {
+        let calculationHistory = document.querySelector('.calculation-history');
+        calculationHistory.classList.toggle('history-active');
+        if(calculationHistory.style.display === 'block') {
+            calculationHistory.style.display = 'none';
+        } else {
+            calculationHistory.style.display = 'block';
+        }
+    },
+
+    updateList: function() {
+        while (this.listElement.firstChild) {
+            this.listElement.removeChild(this.listElement.firstChild);
+        }
+        for(const text of this.textList) {
+            this.listElement.appendChild(this.createListItem(text));
+        }
+    },
+
+    clearList: function() {
+        this.textList = ['Calculation History:'];
+    },
+
+    addListItem: function(calculatedValue) {
+        this.textList.push(`${this.previousOperand} ${this.operation} ${this.currentOperand} = ${calculatedValue}`)
     }
 
 }
 
+// Step 2. Define variables
 const previousOperandElement = document.querySelector('[data-previous-operand]')
 const currentOperandElement = document.querySelector('[data-current-operand]')
-
 const numberButtons = document.querySelectorAll('[data-number]')
 const operationButtons = document.querySelectorAll('[data-operation]')
 const equalsButton = document.querySelector('[data-equals]')
@@ -162,15 +160,14 @@ const deleteButton = document.querySelector('[data-delete]')
 const clearEntryButton = document.querySelector('[data-clear-entry]')
 const allClearButton = document.querySelector('[data-all-clear]')
 const signButton = document.querySelector('[data-sign]')
-
 const recallHistoryButton = document.querySelector('[data-history-recall]')
-// const memorySaveButton = document.querySelector('[data-memory-save]')
 const clearHistoryButton = document.querySelector('[data-history-clear]')
 const myList = document.querySelector('[data-history-list]')
 
+// Step 3. Create a new instance of Calculator called calculator and pass in 3 properties
 const calculator = new Calculator(previousOperandElement, currentOperandElement, myList);
 
-
+// Step 4. Declare event listener functions
 numberButtons.forEach( button => {
     button.addEventListener('click', function () {
         calculator.appendNumber(button.value);

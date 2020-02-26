@@ -1,60 +1,20 @@
-// Method using class syntax
-// Create Calculator class to store data
+// **Method using class syntax**
+// Step 1. Declare class as blueprint for object which will store data
 
 class Calculator {
-    // Instance properties
+    // ** Instance properties**
     constructor(previousOperandElement, currentOperandElement, element) {
         this.previousOperandElement = previousOperandElement;
         this.currentOperandElement = currentOperandElement;
         // Boolean to flag if computation has just been completed
         this.calculationBoolean = false;
         // Set to default values
-        this.allClear();
-        
+        this.allClear();        
         // Properties for historyList
         this.listElement = element;        
         this.textList = ['Calculation History:'];        
     }
-    // **Instance methods** --> Will sit in the object's prototype
-    // Methods for calculation history ul
-    static createListItem(text) {
-        const li = document.createElement('li');
-        li.textContent = text;
-        return li;
-    }
-
-    // Helper function to display calculation history
-    recallHistory() {
-        let calculationHistory = document.querySelector('.calculation-history');
-        calculationHistory.classList.toggle('history-active');
-        if(calculationHistory.style.display === 'block') {
-            calculationHistory.style.display = 'none';
-        } else {
-            calculationHistory.style.display = 'block';
-        }
-    }
-
-    updateList() {
-        // alert('updateList is running')
-        while (this.listElement.firstChild) {
-            this.listElement.removeChild(this.listElement.firstChild);
-        }
-        for(const text of this.textList) {
-            this.listElement.appendChild(Calculator.createListItem(text));
-        }
-    }
-
-    clearList() {
-        this.textList = ['Calculation History:'];
-    }
-
-    addListItem (calculatedValue) {
-        this.textList.push(`${this.previousOperand} ${this.operation} ${this.currentOperand} = ${calculatedValue}`)
-    }
-    
-    
-    
-    
+    // **Instance methods for calculator** --> Methods sit in the object's prototype
     allClear() {
         // Set both operands as empty strings
         this.previousOperand = '';
@@ -78,7 +38,7 @@ class Calculator {
     appendNumber(number) {
         // Number is passed in as an arguement from the button.addEventListener
         // Verify numbers are strings with toString()
-        
+
         // Define behaviour if Boolean === true and number === decimal
         // If compute() has executed this will execute and reset boolean to false.
         if(this.calculationBoolean === true && number === '.') {
@@ -105,7 +65,7 @@ class Calculator {
         if (this.currentOperand.length > 14) return;
 
         // Now we know currentOperand !include('.') define behaviour of decimal value
-        // Case when this.currentOperand === undefined after this operation is selected by user     
+        // Case when this.currentOperand === undefined after this.operation is selected by user     
         if (number === '.' && this.currentOperand === '') {
             this.currentOperand = '0' + number.toString();
             return           
@@ -138,8 +98,6 @@ class Calculator {
         this.operation = operation;
         this.previousOperand = this.currentOperand;
         this.currentOperand = '';   
-        //console.log(this.previousOperand);        
-        
     }
 
     compute() {
@@ -151,9 +109,6 @@ class Calculator {
         const current = parseFloat(this.currentOperand);        
         // If either is NaN then exit function
         if (isNaN(prev) || isNaN(current)) return
-        // console.log(prev);
-        // console.log(current);
-        // console.log(this.operation);
         // Depending on our operator value, compute calculatedValue
         switch (this.operation) {
             case '%':
@@ -173,23 +128,20 @@ class Calculator {
                 break
             default: return                
         }
-        // console.log(calculatedValue);
+        // Update calculation history list
         this.addListItem(calculatedValue);
         this.updateList();
+        // Update for result of calculation
         this.currentOperand = calculatedValue;
         this.previousOperand = '';
         this.operation = undefined;
         // Set out flag to true as calculation has been executed
         this.calculationBoolean = true;
-        // console.log(this.currentOperand); 
     }
 
     updateDisplay() {
         // The string in the calculator object is inserted into the currentOperand output
         this.currentOperandElement.innerText = this.currentOperand;
-        // console.log('previousOperand: ', this.previousOperand);
-        // console.log('operation: ', this.operation);
-        // console.log('currentOperand: ', this.currentOperand);
         if(this.operation != null) {
             this.previousOperandElement.innerText = 
             `${this.previousOperand} ${this.operation}`;
@@ -197,14 +149,52 @@ class Calculator {
         if (this.operation == null) {
             this.previousOperandElement.innerText = '';
         }
-    }    
+    }
 
-} 
 
-// Define calculator variables
+    // **Instance methods to create calculation history ul**
+    static createListItem(text) {
+        const li = document.createElement('li');
+        li.textContent = text;
+        return li;
+    }
+
+    // Helper function to toggle display of calculation history
+    recallHistory() {
+        let calculationHistory = document.querySelector('.calculation-history');
+        calculationHistory.classList.toggle('history-active');
+        if(calculationHistory.style.display === 'block') {
+            calculationHistory.style.display = 'none';
+        } else {
+            calculationHistory.style.display = 'block';
+        }
+    }
+
+    updateList() {
+        // alert('updateList is running')
+        // Remove all existing li
+        while (this.listElement.firstChild) {
+            this.listElement.removeChild(this.listElement.firstChild);
+        }
+        // For each element in textList create a li and append to this.listElement
+        for(const text of this.textList) {
+            this.listElement.appendChild(Calculator.createListItem(text));
+        }
+    }
+
+    clearList() {
+        this.textList = ['Calculation History:'];
+    }
+    // Each time compute() is called, create string and push to textList
+    addListItem (calculatedValue) {
+        this.textList.push(`${this.previousOperand} ${this.operation} ${this.currentOperand} = ${calculatedValue}`)
+    }
+
+}    
+
+// Step 2. Define variables
 const previousOperandElement = document.querySelector('[data-previous-operand]')
 const currentOperandElement = document.querySelector('[data-current-operand]')
-
 const numberButtons = document.querySelectorAll('[data-number]')
 const operationButtons = document.querySelectorAll('[data-operation]')
 const equalsButton = document.querySelector('[data-equals]')
@@ -212,22 +202,18 @@ const deleteButton = document.querySelector('[data-delete]')
 const clearEntryButton = document.querySelector('[data-clear-entry]')
 const allClearButton = document.querySelector('[data-all-clear]')
 const signButton = document.querySelector('[data-sign]')
-
 const recallHistoryButton = document.querySelector('[data-history-recall]')
-// const memorySaveButton = document.querySelector('[data-memory-save]')
 const clearHistoryButton = document.querySelector('[data-history-clear]')
 const myList = document.querySelector('[data-history-list]')
 
-// Create a new instance of Calculator called calculator
+// Step 3. Create a new instance of Calculator called calculator and pass in 3 properties
 const calculator = new Calculator(previousOperandElement, currentOperandElement, myList);
 
-// Add event listeners
-
+// Step 4. Declare event listener functions
 numberButtons.forEach(button => {
     button.addEventListener('click', function() {
         // console.log(button.value)
         // Pass arguement into appendNumber method for calculator object
-        // Used button.value instead of .value --> surplus code in HTML?
         calculator.appendNumber(button.value);
         // console.log(button.value);
         calculator.updateDisplay();
