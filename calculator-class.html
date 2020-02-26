@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Calculator Application</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="A standard calculator">	
+    <link rel="stylesheet" href="/css/reset.css">
+    <link rel="stylesheet" href="/css/app.css">
+</head>
+<body>
+    <form id="calculator" role="application">
+        <output id="calc-display">
+            <div data-previous-operand id="previous-operand"></div>
+            <div data-current-operand id="current-operand">0</div>
+        </output>
+        
+        <div id="calc-buttons">
+            <button data-history-recall type="button" id="recall" class="recall-js" value="MR" aria-label="recall-calculation-history">MR</button>
+            <input data-history-clear type="button" id="clear" value="MC" aria-label="clear">
+            <input data-operation type="button" id="modulo" value="%" aria-label="modulus-operation">
+            <input data-operation type="button" id="divide" value="÷" aria-label="divide-operation">
+
+            <input data-delete type="button" id="delete" value="DEL" aria-label="delete">
+            <input data-number type="button" id="seven" value="7" aria-label="7">
+            <input data-number type="button" id="eight" value="8" aria-label="8">
+            <input data-number type="button" id="nine" value="9" aria-label="9">
+            <input data-operation type="button" id="product" value="x" aria-label="multiply-operation">
+
+            <input data-sign type="button" id="sign" value="+/-" aria-label="reverse-sign">
+            <input data-number type="button" id="four" value="4" aria-label="4">
+            <input data-number type="button" id="five" value="5" aria-label="5">
+            <input data-number type="button" id="six" value="6" aria-label="6">
+            <input data-operation type="button" id="subtract" value="-" aria-label="subtract-operation">        
+
+            <input data-clear-entry type="button" id="clear-entry" value="C" aria-label="clear-current-input">
+            <input data-number type="button" id="one" value="1" aria-label="1">
+            <input data-number type="button" id="two" value="2" aria-label="2">
+            <input data-number type="button" id="three" value="3" aria-label="3">
+            <input data-operation type="button" id="add" value="+" aria-label="addition-operation">
+
+            <input data-all-clear type="button" id="all-clear" value="AC" aria-label="clear-all-inputs">
+            <input data-number type="button" id="zero" value="0" aria-label="0">
+            <input data-number type="button" id="decimal" value="." aria-label=".">
+            <input data-equals type="button" id="equals" value="=" aria-label="equals-operation">
+        </div>
+
+        <div class="calculation-history">
+            <ul data-history-list>
+                <li>Calculation History:</li>
+                <!-- To be populated by JS -->
+            </ul>
+        </div>
+
+    </form>
+
+<script src="/js/app-class.js"></script>
+<!-- <script src="/js/app-constructor.js"></script> -->
+<!-- <script src="/js/class-tutorial.js"></script> -->
+    
+</body>
+</html>
